@@ -1,4 +1,4 @@
-const countdownDate = new Date('Dec 31, 2020').getTime();
+const countdownDate = new Date('Jan 31, 2021').getTime();
 
 // Update my countdown every 1 sec
 let id = setInterval(function () {
@@ -21,7 +21,7 @@ let id = setInterval(function () {
     sec: (document.querySelector('[data-value="secs"]').textContent = secs),
   };
 
-  if (time < 0) {
+  if (time <= 0) {
     clearInterval(id);
     refs.day.textContent = 0;
     refs.hour.textContent = 0;
