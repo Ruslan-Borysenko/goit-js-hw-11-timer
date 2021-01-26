@@ -1,4 +1,13 @@
-const countdownDate = new Date('Jan 31, 2021').getTime();
+const refs = {
+  day: document.querySelector('[data-value="days"]'),
+  hour: document.querySelector('[data-value="hours"]'),
+  min: document.querySelector('[data-value="mins"]'),
+  sec: document.querySelector('[data-value="secs"]'),
+};
+
+const { day, hour, min, sec } = refs;
+
+const countdownDate = new Date('Jan 12, 2021').getTime();
 
 // Update my countdown every 1 sec
 let id = setInterval(function () {
@@ -6,7 +15,7 @@ let id = setInterval(function () {
   let now = new Date().getTime();
 
   // Find the time between now and the count down date
-  let time = countdownDate - now;
+  const time = countdownDate - now;
 
   // Time calculations for days, hours, minutes and seconds
   const days = Math.floor(time / (1000 * 60 * 60 * 24));
@@ -14,18 +23,17 @@ let id = setInterval(function () {
   const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
   const secs = Math.floor((time % (1000 * 60)) / 1000);
 
-  const refs = {
-    day: (document.querySelector('[data-value="days"]').textContent = days),
-    hour: (document.querySelector('[data-value="hours"]').textContent = hours),
-    min: (document.querySelector('[data-value="mins"]').textContent = mins),
-    sec: (document.querySelector('[data-value="secs"]').textContent = secs),
-  };
+  day.textContent = days;
+  hour.textContent = hours;
+  min.textContent = mins;
+  sec.textContent = secs;
 
   if (time <= 0) {
     clearInterval(id);
-    refs.day.textContent = 0;
-    refs.hour.textContent = 0;
-    refs.min.textContent = 0;
-    refs.sec.textContent = 0;
+    Object.keys(refs).map(key => (refs[key].textContent = 0));
+    // day.textContent = 0;
+    // hour.textContent = 0;
+    // min.textContent = 0;
+    // sec.textContent = 0;
   }
 }, 1000);
